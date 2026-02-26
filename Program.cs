@@ -15,7 +15,7 @@ namespace AnimalWorld {
     protected int age;
     protected string livingEnvironment;
     protected string foodType;
-    
+
     public Animal(string nickname, int age, string livingEnvironment, string foodType) {
       this.nickname = nickname;
       this.age = age;
