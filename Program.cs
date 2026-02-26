@@ -15,7 +15,7 @@ namespace AnimalWorld {
     protected int age;
     protected string livingEnvironment;
     protected string foodType;
-
+    
     public Animal(string nickname, int age, string livingEnvironment, string foodType) {
       this.nickname = nickname;
       this.age = age;
@@ -23,7 +23,7 @@ namespace AnimalWorld {
       this.foodType = foodType;
     }
 
-    public virtual string GetInfo() { 
+    public virtual string GetInfo() {
       return $"Name: {nickname}, Age: {age}, Environment: {livingEnvironment}, Food: {foodType}";
     }
   }
@@ -71,26 +71,27 @@ namespace AnimalWorld {
 
   // ==================== SINGLETON MANAGER ====================
   class AnimalManager {
-    private static AnimalManager instance;
+    public static int index = 1;
+    private static AnimalManager s_instance;
     private List<Animal> animals = new List<Animal>();
 
     private AnimalManager() { }
 
     public static AnimalManager Instance {
-      get { 
-        if (instance == null)
-          instance = new AnimalManager();
-        return instance;
+      get {
+        if (s_instance == null)
+          s_instance = new AnimalManager();
+        return s_instance;
       }
     }
 
-    public void AddAnimal(Animal animal) { 
+    public void AddAnimal(Animal animal) {
       animals.Add(animal);
       Console.WriteLine("Animal added!");
     }
 
     public void ShowAllAnimals() {
-      
+
       if (animals.Count == 0) {
         Console.WriteLine("No animals in the list.");
         return;
@@ -98,8 +99,8 @@ namespace AnimalWorld {
 
       Console.WriteLine("\n--- ANIMAL LIST ---");
 
-      for (int numberOfAnimals = 0; numberOfAnimals < animals.Count; numberOfAnimals++) {
-        Console.WriteLine($"{numberOfAnimals + 1}. {animals[numberOfAnimals].GetInfo()}");
+      for (int numberOfAnimals = 0; numberOfAnimals < animals.Count; ++numberOfAnimals) {
+        Console.WriteLine($"{numberOfAnimals + index}. {animals[numberOfAnimals].GetInfo()}");
       }
     }
   }
@@ -107,21 +108,17 @@ namespace AnimalWorld {
   // ==================== MAIN PROGRAM ====================
   class Program {
 
-    static void Main() { 
+    static void Main() {
 
       AnimalManager manager = AnimalManager.Instance;
 
       manager.AddAnimal(new Mammal("Fluffy", 5, "forest", "carnivore", true));
       manager.AddAnimal(new Bird("Tweety", 2, "tropics", "omnivore", 0.5));
-      manager.AddAnimal(new Fish("Nemo", 1, "ocean", "carnivore", "salt"));
+      manager.AddAnimal(new Fish("Nemesis", 1, "ocean", "carnivore", "salt"));
 
       bool exit = false;
       while (!exit) {
-        Console.WriteLine("\n=== MENU ===");
-        Console.WriteLine("1. Show all animals");
-        Console.WriteLine("2. Add an animal");
-        Console.WriteLine("3. Exit");
-        Console.Write("Choose action (1-3): ");
+        Console.WriteLine("\n=== MENU ===\n1. Show all animals\n2. Add an animal\n3. Exit\nChoose action (1-3): ");
 
         string choice = Console.ReadLine();
         switch (choice) {
@@ -146,11 +143,7 @@ namespace AnimalWorld {
     }
 
     static void AddSimpleAnimal(AnimalManager manager) {
-      Console.WriteLine("\n--- ADD AN ANIMAL ---");
-      Console.WriteLine("1. Add a dog (mammal)");
-      Console.WriteLine("2. Add a parrot (bird)");
-      Console.WriteLine("3. Add a goldfish");
-      Console.Write("Choose (1-3): ");
+      Console.WriteLine($"\n--- ADD AN ANIMAL ---\n1. Add a dog (mammal)\n2. Add a parrot (bird)\n3. Add a goldfish\nChoose (1-3): ");
 
       string animalChoice = Console.ReadLine();
 
@@ -162,7 +155,7 @@ namespace AnimalWorld {
           manager.AddAnimal(new Bird("Tweety", 2, "cage", "seeds", 0.3));
           break;
         case "3":
-          manager.AddAnimal(new Fish("Goldie", 1, "aquarium", "flakes", "fresh"));
+          manager.AddAnimal(new Fish("Umpa", 1, "aquarium", "flakes", "fresh"));
           break;
         default:
           Console.WriteLine("❌ Invalid choice!");
