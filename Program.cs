@@ -15,7 +15,7 @@ namespace AnimalWorld {
     protected int age;
     protected string livingEnvironment;
     protected string foodType;
-    
+
     public Animal(string nickname, int age, string livingEnvironment, string foodType) {
       this.nickname = nickname;
       this.age = age;
@@ -33,8 +33,8 @@ namespace AnimalWorld {
     private bool hasFur;
 
     public Mammal(string nickname, int age, string livingEnvironment, string foodType, bool hasFur)
-        : base(nickname, age, livingEnvironment, foodType) {
-      this.hasFur = hasFur;
+    : base(nickname, age, livingEnvironment, foodType) {
+        this.hasFur = hasFur;
     }
 
     public override string GetInfo() {
@@ -47,9 +47,9 @@ namespace AnimalWorld {
     private double wingSpan;
 
     public Bird(string nickname, int age, string livingEnvironment, string foodType, double wingSpan)
-        : base(nickname, age, livingEnvironment, foodType) {
-      this.wingSpan = wingSpan;
-    }
+    : base(nickname, age, livingEnvironment, foodType) {
+        this.wingSpan = wingSpan;
+      }
 
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Bird, Wingspan: {wingSpan} m";
@@ -60,9 +60,9 @@ namespace AnimalWorld {
     private string waterType;
 
     public Fish(string nickname, int age, string livingEnvironment, string foodType, string waterType)
-        : base(nickname, age, livingEnvironment, foodType) {
-      this.waterType = waterType;
-    }
+      : base(nickname, age, livingEnvironment, foodType) {
+          this.waterType = waterType;
+        }
 
     public override string GetInfo() {
       return base.GetInfo() + $", Type: Fish, Water: {waterType}";
@@ -79,8 +79,9 @@ namespace AnimalWorld {
 
     public static AnimalManager Instance {
       get {
-        if (s_instance == null)
+        if (s_instance == null) {
           s_instance = new AnimalManager();
+        }
         return s_instance;
       }
     }
@@ -151,14 +152,17 @@ namespace AnimalWorld {
         case "1":
           manager.AddAnimal(new Mammal("Buddy", 3, "house", "omnivore", true));
           break;
+
         case "2":
           manager.AddAnimal(new Bird("Tweety", 2, "cage", "seeds", 0.3));
           break;
+
         case "3":
           manager.AddAnimal(new Fish("Umpa", 1, "aquarium", "flakes", "fresh"));
           break;
+
         default:
-          Console.WriteLine("❌ Invalid choice!");
+          Console.WriteLine("Invalid choice!");
           break;
       }
     }
