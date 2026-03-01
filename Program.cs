@@ -163,7 +163,7 @@ namespace AnimalWorld {
           break;
 
         default:
-          Console.WriteLine("❌ Invalid choice!");
+          Console.WriteLine("Invalid choice!");
           break;
       }
     }
